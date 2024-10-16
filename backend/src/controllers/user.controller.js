@@ -114,3 +114,48 @@ export const logout = async (req, res) => {
     return res.status(500).json({ message: "Server error", success: false });
   }
 };
+
+// Update Profile
+export const updateProfile = async (req, res) => {
+  try {
+    // Get data
+    const { fullName, email, password, phoneNumber, bio, skills } = req.body;
+
+    // Authenticate
+    const userId = req.id;
+
+    // Find and update user
+    let skillsArray;
+    if (skills) {
+      skillsArray = skills.split(",");
+    }
+
+    const updatedFields = {};
+    if (fullName) updatedFields["fullName"] = fullName;
+    if (email) updatedFields["email"] = email;
+    if (phoneNumber) updatedFields["phoneNumber"] = phoneNumber;
+    if (bio) updatedFields["profile.bio"] = bio;
+    if (skills) updatedFields["profile.skills"] = skillsArray;
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $set: updatedFields },
+      { new: true } // Return the updated document
+    );
+
+    if (!updatedUser) {
+      return res
+        .status(404)
+        .json({ message: "User not found", success: false });
+    }
+
+    return res.status(200).json({
+      message: "Profile updated successfully",
+      user: updatedUser,
+      success: true,
+    });
+  } catch (error) {
+    console.error("Update Profile error:", error);
+    return res.status(500).json({ message: "Server error", success: false });
+  }
+};
