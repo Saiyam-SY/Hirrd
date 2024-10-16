@@ -119,7 +119,7 @@ export const logout = async (req, res) => {
 export const updateProfile = async (req, res) => {
   try {
     // Get data
-    const { fullName, email, password, phoneNumber, bio, skills } = req.body;
+    const { fullName, email, phoneNumber, bio, skills } = req.body;
 
     // Authenticate
     const userId = req.id;

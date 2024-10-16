@@ -11,9 +11,11 @@ app.use(cors({ credentials: true, origin: process.env.CORS_ORIGIN }));
 app.use(cookieParser());
 
 // import apis
+import companyRouter from "./routes/company.route.js";
 import userRouter from "./routes/user.route.js";
 
 //apis
 app.use("/api/v1/user", userRouter);
+app.use("/api/v1/company", companyRouter);
 
 export { app };
