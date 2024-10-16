@@ -100,3 +100,17 @@ export const login = async (req, res) => {
     return res.status(500).json({ message: "Server error", success: false });
   }
 };
+
+// Logout
+export const logout = async (req, res) => {
+  try {
+    // Clear cookies
+    return res
+      .status(200)
+      .clearCookie("token", { maxAge: 0 })
+      .json({ message: "Logged out successfully", success: true });
+  } catch (error) {
+    console.error("Logout error:", error);
+    return res.status(500).json({ message: "Server error", success: false });
+  }
+};
