@@ -11,6 +11,7 @@ app.use(cors({ credentials: true, origin: process.env.CORS_ORIGIN }));
 app.use(cookieParser());
 
 // import apis
+import applicationRouter from "./routes/application.route.js";
 import companyRouter from "./routes/company.route.js";
 import jobRouter from "./routes/job.route.js";
 import userRouter from "./routes/user.route.js";
@@ -19,5 +20,6 @@ import userRouter from "./routes/user.route.js";
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/company", companyRouter);
 app.use("/api/v1/job", jobRouter);
+app.use("/api/v1/application", applicationRouter);
 
 export { app };
