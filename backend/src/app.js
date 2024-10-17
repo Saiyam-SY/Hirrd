@@ -12,10 +12,12 @@ app.use(cookieParser());
 
 // import apis
 import companyRouter from "./routes/company.route.js";
+import jobRouter from "./routes/job.route.js";
 import userRouter from "./routes/user.route.js";
 
 //apis
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/company", companyRouter);
+app.use("/api/v1/job", jobRouter);
 
 export { app };
